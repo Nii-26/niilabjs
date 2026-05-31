@@ -5,8 +5,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="" />
+  <link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.25/"></script>
+<script> require([
+    "esri/config",
+    "esri/Map",
+    "esri/views/MapView"
+  ], function(esriConfig, Map, MapView) 
+  {esriConfig.apiKey = "AAPTa_vbco_iWPTdn2JLKjDNZng..isDFZ5QJioUIqDsIaWnaXOOy_yTaNggwV7sg4C0Qa4biJucub_9lOJswy41vOMR4VcwhdmKDc_cw--9iwzbDSX4aWr0FakD4h1l_GFZ1lYiZxlND38awbMEs5NtlejKZL4-c0nHdYF_y0ycpehRtbRU3r2lgh4L1V_XiV8LlJUY4ZsDEu0G1TlnFuu6Al43bSSlaKusdR3RLqmFYpweKhJLV6bxTeyLp47Cpqe542E2ZgDQ77FFZC__RXIcyimEg4n24mg..AT1_bryZT1WS"
+    const map = new Map({
+    basemap: "arcgis-topographic"
+  });
+
+  const view = new MapView({
+    map: map,
+    center: [-97.7431, 30.2672],
+    zoom: 13,
+    container: "viewDiv"
+  });
+  });</script>
+  <style>
+  html, body, #viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+</style>
+
 </head>
 <body>
-  <h1>Hello, world! I am using Git!</h1>
+<div id="viewDiv"></div>
 </body>
 </html>
