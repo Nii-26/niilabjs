@@ -8,27 +8,6 @@
   
   <link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css">
   <script src="https://js.arcgis.com/4.25/"></script>
-<script> 
-
-require([
-    "esri/config",
-    "esri/Map",
-    "esri/views/MapView"
-  
-  ], function(esriConfig, Map, MapView) {
-    esriConfig.apiKey = "AAPTa_vbco_iWPTdn2JLKjDNZng..isDFZ5QJiAAPTaUuTfPeOougHYyi-81mPw7Q..FykhhY5f0uu3190z7-RNBr2kVwqCJM9ZmoZgx7el3MzQDS4wJn97h8_CwG6eKtoivoMSooQ3lEmGavXCbZ1A6scom3moocx8Z-IMR8_FZsPpgPqtF5yrtTF4XBLFzByeWLgT-iVtTQhrZSR4j0T7MYUn-1TT6bgVnCGtopyCY5NFJhQZxmMNZsw-x74nlOWYp7W2JXei8Fdq2kSzOkhLCzvzhJoU5Z8TypqVKSpfdnuH0KlmTCeDAOiKM9n-iMCq4iqhcg..AT1_bryZT1WSoUIqDsIaWnaXOOy_yTaNggwV7sg4C0Qa4biJucub_9lOJswy41vOMR4VcwhdmKDc_cw--9iwzbDSX4aWr0FakD4h1l_GFZ1lYiZxlND38awbMEs5NtlejKZL4-c0nHdYF_y0ycpehRtbRU3r2lgh4L1V_XiV8LlJUY4ZsDEu0G1TlnFuu6Al43bSSlaKusdR3RLqmFYpweKhJLV6bxTeyLp47Cpqe542E2ZgDQ77FFZC__RXIcyimEg4n24mg..AT1_bryZT1WS"
-    const map = new Map({
-    basemap: "arcgis-streets" // Basemap layer
-  });
-
-  const view = new MapView({
-    map: map,
-    center: [-97.7431, 30.2672], // longitude, latitude
-    zoom: 13, // Zoom level
-    container: "viewDiv" // Div element
-  });
-  });
-  </script>
   
   <style>
   html, 
@@ -44,5 +23,26 @@ require([
 </head>
 <body>
 <div id="viewDiv"></div>
+
+<script> 
+require([
+    "esri/config",
+    "esri/Map",
+    "esri/views/MapView"
+  ], function(esriConfig, Map, MapView) {
+    esriConfig.apiKey = "AAPTaO9Vfujg5zIQ-CC5QdBgrGA..wrHE4QUpdg2BG_7PhrY3kHl8AccDEYsFUznGk-M2Eq05RVwTZr-MselUFCsb_FSi-pg7TEG99Mw_LkW5HUHl6AIPaTbYrYOqRdxWQOgU_84aBtjEd4u-DxvSE2qmbQku9prFTY6abBS-LKrHKiPRty3cXtFZD6ob8tuMOMSDKWMmuqLZVYZywdifGR274xo4wurRER52z6L0AFLC2uJbZpxtV8VERVNm0Tvl1sjikseA_xPf7u51ndQWKm1sIbNsQ0wB7hht--N5lzlIuRhWqA..AT1_bryZT1WS"; // Replace with your ArcGIS API key
+
+    const map = new Map({
+      basemap: "arcgis-topographic" // Basemap layer
+    });
+
+    const view = new MapView({
+      map: map,
+      center: [-97.7431, 30.2672], // longitude, latitude
+      zoom: 13, // Zoom level
+      container: "viewDiv" // Div element
+    });
+});
+</script>
 </body>
 </html>
