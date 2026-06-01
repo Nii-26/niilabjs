@@ -28,20 +28,77 @@
 require([
     "esri/config",
     "esri/Map",
-    "esri/views/MapView"
-  ], function(esriConfig, Map, MapView) {
+    "esri/views/MapView",
+    "esri/widgets/BasemapGallery",
+    "esri/widgets/Expand",
+    "esri/widgets/Search"
+  ], function(esriConfig, Map, MapView, BasemapGallery, Expand, Search) {
     esriConfig.apiKey = "AAPTaQRHrrWJrCdyUSeGVllknJQ..D_ksipWyerEYi6KkiRO5geUCVpCXjYPboHsbNK8Z-3wZkzzMnTlzYhB5s8wAdi4caGeGFeuQ0HbohuZMTxfe0EnFaRs0tKaoEWapbQlxakLVwssS_sg9ZQUWOoNnpSsvtmNZXVfihyUudknEBnI6FVVLrCUxLYFt6hNscxqb3hE4N43q4InCoo4OVmZjqhS7Y7VPvuVLc1l-c114x2hSMM5_52EZ05xcg5Lr3DnnvhVHgiFJ2wHuVe5BD2GJg4fNJagzVfxY7sRFEu7ORiwcZA..AT1_bryZT1WS"; // Replace with your ArcGIS API key
 
     const map = new Map({
-      basemap: "arcgis-topographic" // Basemap layer
+      basemap: "streets-vector" // Basemap layer
     });
 
     const view = new MapView({
       map: map,
       center: [-0.1870, 5.6037], //longitude, latitude
-      zoom: 11, // Zoom level 
+      zoom: 14, // Zoom level 
       container: "viewDiv" // Div element
     });
+
+    // Create BasemapGallery widget
+    const basemapGallery = new BasemapGallery({
+      view: view,
+      source: {
+        query: {
+          title: "*"
+        }
+      }
+    });
+
+    // Create Expand widget to collapse/expand the BasemapGallery
+    const bgExpand = new Expand({
+      view: view,
+      content: basemapGallery,
+      expandIconClass: "esri-icon-basemap",
+      expanded: false
+    });
+
+    // Add the expanded basemap gallery to the view UI
+    view.ui.add(bgExpand, "top-right");
+
+    // Create Search widget
+    const searchWidget = new Search({
+      view: view,
+      allPlaceholder: "Search for addresses, landmarks, or coordinates"
+    });
+
+    // Add the Search widget to the top-left of the view UI
+    view.ui.add(searchWidget, "top-left");
+
+    // Add HTML5 Geolocation
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          // Successfully obtained user's position
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          
+          // Center map on user's location
+          view.center = [longitude, latitude];
+          view.zoom = 14;
+          
+          console.log("Map centered on user location: ", latitude, longitude);
+        },
+        function(error) {
+          // Handle geolocation errors
+          console.warn("Geolocation error:", error.message);
+          console.log("Using default location (Accra, Ghana)");
+        }
+      );
+    } else {
+      console.log("Geolocation not supported by browser");
+    }
 });
 </script>
 </body>
