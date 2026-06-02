@@ -84,6 +84,28 @@ require([
     // Add the Locate widget to the UI (near the Search widget)
     view.ui.add(locateWidget, "top-left");
 
+    // Add a manual Locate button that uses HTML5 geolocation (reliable centering)
+    const locateBtn = document.createElement("div");
+    locateBtn.className = "esri-widget esri-widget--button esri-interactive";
+    locateBtn.title = "Find my location";
+    locateBtn.innerHTML = '<span class="esri-icon-locate" aria-hidden="true"></span>';
+    locateBtn.addEventListener("click", function() {
+      if (!navigator.geolocation) {
+        console.warn("Geolocation not supported by browser");
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(function(pos) {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+        view.goTo({ center: [lon, lat], zoom: 14 });
+      }, function(err) {
+        console.warn("Geolocation error:", err.message);
+      }, { enableHighAccuracy: true, timeout: 10000 });
+    });
+
+    // Place the manual locate button in the UI (next to Search)
+    view.ui.add(locateBtn, "top-left");
+
     // Automatic geolocation is disabled. Use the Locate widget to center the map on the user's location.
     // To re-enable automatic geolocation on load, uncomment the block below.
     /*
