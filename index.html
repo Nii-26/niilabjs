@@ -32,8 +32,7 @@ require([
     "esri/widgets/BasemapGallery",
     "esri/widgets/Expand",
     "esri/widgets/Search",
-    "esri/widgets/Locate"
-  ], function(esriConfig, Map, MapView, BasemapGallery, Expand, Search, Locate) {
+  ], function(esriConfig, Map, MapView, BasemapGallery, Expand, Search) {
     esriConfig.apiKey = "AAPTaBYUCP8VdASkl0zXCT2yICA..EozE9ZaXvCAWsuXL9S1fzUeGS71LyuSq8ryoWDz6rzg7qjp5gbew28Eaqy7vLDeSqRRKNs9qeNyRH68YU2J9yc7jzrnzdhEW2C0fLBDrJhMUKq32AWscY4dw_JwOXhsP3-JIiTsMcuVcWJC9sf5g_azyUZQv8AHHKWxHNAlb647MRhFO6pOuy9V74sSBiEbzDv0-1OaaVAWhiyh1grKGRNfGV29wnxkDI5kREVm8T1Cf4TJdl2UZOihpcULBR-CiL8pHUgggVmF7b8TllAMl8Q..AT1_bryZT1WS"; // Replace with your ArcGIS API key
 
     const map = new Map({
@@ -77,7 +76,7 @@ require([
       view: view,
       useHeadingEnabled: false,
       goToOverride: function(view, options) {
-        return view.goTo({ center: options.target, zoom: 14 });
+        return view.goTo({ center: options.target, zoom: 3 });
       }
     });
 
