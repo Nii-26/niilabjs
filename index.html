@@ -87,7 +87,7 @@ require([
       navigator.geolocation.getCurrentPosition(function(position) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-        view.goTo({ center: [longitude, latitude], zoom: 14 });
+        view.goTo({ center: [longitude, latitude], zoom: 2 });
       }, function(error) {
         console.warn("Geolocation error:", error.message);
       }, {
