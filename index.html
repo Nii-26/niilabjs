@@ -42,7 +42,7 @@ require([
     const view = new MapView({
       map: map,
       center: [-0.1870, 5.6037], //longitude, latitude
-      zoom: 10, // Zoom level 
+      zoom: 11, // Zoom level 
       container: "viewDiv" // Div element
     });
 
@@ -56,7 +56,7 @@ require([
       view: view,
       content: basemapGallery,
       expandIconClass: "esri-icon-basemap",
-      expanded: true
+      expanded: false
     });
 
     // Add the expanded basemap gallery to the view UI
