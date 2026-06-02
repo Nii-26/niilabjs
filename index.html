@@ -31,8 +31,9 @@ require([
     "esri/views/MapView",
     "esri/widgets/BasemapGallery",
     "esri/widgets/Expand",
-    "esri/widgets/Search"
-  ], function(esriConfig, Map, MapView, BasemapGallery, Expand, Search) {
+    "esri/widgets/Search",
+    "esri/widgets/Locate"
+  ], function(esriConfig, Map, MapView, BasemapGallery, Expand, Search, Locate) {
     esriConfig.apiKey = "AAPTaBYUCP8VdASkl0zXCT2yICA..EozE9ZaXvCAWsuXL9S1fzUeGS71LyuSq8ryoWDz6rzg7qjp5gbew28Eaqy7vLDeSqRRKNs9qeNyRH68YU2J9yc7jzrnzdhEW2C0fLBDrJhMUKq32AWscY4dw_JwOXhsP3-JIiTsMcuVcWJC9sf5g_azyUZQv8AHHKWxHNAlb647MRhFO6pOuy9V74sSBiEbzDv0-1OaaVAWhiyh1grKGRNfGV29wnxkDI5kREVm8T1Cf4TJdl2UZOihpcULBR-CiL8pHUgggVmF7b8TllAMl8Q..AT1_bryZT1WS"; // Replace with your ArcGIS API key
 
     const map = new Map({
@@ -71,29 +72,35 @@ require([
     // Add the Search widget to the top-left of the view UI
     view.ui.add(searchWidget, "top-left");
 
-    // Add HTML5 Geolocation
+    // Create Locate widget (visible button) to center map on user's location
+    const locateWidget = new Locate({
+      view: view,
+      useHeadingEnabled: false,
+      goToOverride: function(view, options) {
+        return view.goTo({ center: options.target, zoom: 14 });
+      }
+    });
+
+    // Add the Locate widget to the UI (near the Search widget)
+    view.ui.add(locateWidget, "top-left");
+
+    // Automatic geolocation is disabled. Use the Locate widget to center the map on the user's location.
+    // To re-enable automatic geolocation on load, uncomment the block below.
+    /*
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        function(position) {
-          // Successfully obtained user's position
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          
-          // Center map on user's location
-          view.center = [longitude, latitude];
-          view.zoom = 14;
-          
-          console.log("Map centered on user location: ", latitude, longitude);
-        },
-        function(error) {
-          // Handle geolocation errors
-          console.warn("Geolocation error:", error.message);
-          console.log("Using default location (Accra, Ghana)");
-        }
-      );
+      navigator.geolocation.getCurrentPosition(function(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        view.center = [longitude, latitude];
+        view.zoom = 14;
+        console.log("Map centered on user location: ", latitude, longitude);
+      }, function(error) {
+        console.warn("Geolocation error:", error.message);
+      });
     } else {
       console.log("Geolocation not supported by browser");
     }
+    */
 });
 </script>
 </body>
