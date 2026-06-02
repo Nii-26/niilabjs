@@ -33,9 +33,8 @@ require([
     "esri/widgets/Expand",
     "esri/widgets/Search",
     "esri/layers/GraphicsLayer",
-    "esri/Graphic",
-    "esri/geometry/Circle"
-  ], function(esriConfig, Map, MapView, BasemapGallery, Expand, Search, GraphicsLayer, Graphic, Circle) {
+    "esri/Graphic"
+  ], function(esriConfig, Map, MapView, BasemapGallery, Expand, Search, GraphicsLayer, Graphic) {
     esriConfig.apiKey = "AAPTaBYUCP8VdASkl0zXCT2yICA..EozE9ZaXvCAWsuXL9S1fzUeGS71LyuSq8ryoWDz6rzg7qjp5gbew28Eaqy7vLDeSqRRKNs9qeNyRH68YU2J9yc7jzrnzdhEW2C0fLBDrJhMUKq32AWscY4dw_JwOXhsP3-JIiTsMcuVcWJC9sf5g_azyUZQv8AHHKWxHNAlb647MRhFO6pOuy9V74sSBiEbzDv0-1OaaVAWhiyh1grKGRNfGV29wnxkDI5kREVm8T1Cf4TJdl2UZOihpcULBR-CiL8pHUgggVmF7b8TllAMl8Q..AT1_bryZT1WS"; // Replace with your ArcGIS API key
 
     const map = new Map({
@@ -101,24 +100,7 @@ require([
           // clear previous graphics
           graphicsLayer.removeAll();
 
-          // add accuracy circle (meters)
-          try {
-            const circle = new Circle({
-              center: [longitude, latitude],
-              radius: accuracy
-            });
-            const accuracyGraphic = new Graphic({
-              geometry: circle,
-              symbol: {
-                type: "simple-fill",
-                color: [0, 162, 255, 0.15],
-                outline: { color: [0, 162, 255, 0.6], width: 1 }
-              }
-            });
-            graphicsLayer.add(accuracyGraphic);
-          } catch (err) {
-            console.warn('Unable to create accuracy circle:', err);
-          }
+          // (accuracy circle removed)
 
           // add a marker for the precise location
           const pointGraphic = new Graphic({
